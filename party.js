@@ -47,9 +47,17 @@ class Party {
     }
 
     frame(){
+        const 
+            distX = this.player.x - width / 2,
+            distY = this.player.y - height / 2;
+        push()
+        translate(distX / 5, distY / 5)
+        // TODO: créer une fonction translate sur chaque element.
+        // ou au moins une function move.
         this.elements.forEach( element => {
             element.frame()
         })
+        pop()
     }
 
     draw(){
