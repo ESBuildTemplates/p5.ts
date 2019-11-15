@@ -15,6 +15,10 @@ class CheckPoint extends Polygon {
         }
     }
 
+    reset(){
+        this.obtained = false
+    }
+
     draw(){
 
         strokeWeight(5)

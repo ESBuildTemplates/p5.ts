@@ -20,5 +20,8 @@ class Level extends HitBox {
         this.x = 0
         this.y = 0
         this.spawns = [this.spawns.pop()]
+        this.polygons.forEach( polygon => {
+            polygon.reset()
+        })
     }
 }
