@@ -1,0 +1,4 @@
+
+class Platform extends Polygon {
+
+}

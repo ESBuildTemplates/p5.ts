@@ -1,4 +1,5 @@
 
+document.addEventListener('contextmenu', event => event.preventDefault())
 var party;
 
 function setup(){
@@ -18,7 +19,6 @@ function draw(){
     background(20)
     party.frame()
     party.draw()
-    //party.debug()
 
 }
 
@@ -30,4 +30,26 @@ function keyPressed(){
 }
 function keyReleased(){
     party.keys[String(keyCode)] = false
+}
+
+function mousePressed(){
+    let target
+    if(mouseButton === LEFT){
+        target = party.cursor.touch(
+            ...party.elements.filter( element => {
+                return !(element instanceof Cursor)
+            }).map( element => {
+                return element.polygons
+            }).flat()
+        )
+    }else{
+        target = party.cursor.touch(
+            ...party.elements.filter( element => {
+                return !(element instanceof Cursor)
+            })
+        )
+    }
+    if(target){
+        target._debug = !target._debug
+    }
 }
