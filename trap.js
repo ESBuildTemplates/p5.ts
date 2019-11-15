@@ -1,5 +1,0 @@
-
-
-class Trap extends Polygon {
-    
-}

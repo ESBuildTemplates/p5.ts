@@ -1,6 +1,0 @@
-
-class Enemy extends MoveBox {
-    
-    
-    
-}
