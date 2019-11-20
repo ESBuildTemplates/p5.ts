@@ -11,13 +11,12 @@ function setup(){
     party = new Party({
         padding : 10
     })
-    
 }
 
 function draw(){
 
-    background(20)
     party.frame()
+    background(20)
     party.draw()
 
 }

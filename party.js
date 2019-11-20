@@ -5,15 +5,16 @@ class Party {
         this.levels = [
             new Level( this, {
                 spawn : {
-                    x : width / 2 + 100,
-                    y : height / 2
+                    x : 60,
+                    y : 120
                 },
-                name : 'Crashtest',
+                name : 'Level 1',
                 polygons : [
-                    new Platform( width / 2, height / 2, 200, 10 ),
-                    new Platform( width / 2 + 400, height / 2, 200, 10 ),
-                    new Trap( width / 2 + 200, height / 2, 200, 10 ),
-                    new CheckPoint( width / 2 + 400, height / 2, 200, 10 )
+                    new Platform( 0, 120, 200, 10 ),
+                    new Platform( 400, 60, 200, 10 ),
+                    new Trap( -2000, 200, 10000, height ),
+                    new CheckPoint( 500, 60 )
+
                 ],
                 enemy : [
                     new Enemy(),

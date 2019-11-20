@@ -2,7 +2,8 @@
 
 class Player extends MoveBox {
 
-    constructor( party, x, y ){
+    constructor( party ){
+        
         super( 
             party.level.spawns[0].x,
             party.level.spawns[0].y, 2,
