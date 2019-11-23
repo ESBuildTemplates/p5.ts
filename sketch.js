@@ -1,5 +1,6 @@
 
 document.addEventListener('contextmenu', event => event.preventDefault())
+
 var party;
 
 function setup(){
