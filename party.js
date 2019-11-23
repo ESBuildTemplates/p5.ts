@@ -10,10 +10,13 @@ class Party {
                 },
                 name : 'Level 1',
                 polygons : [
-                    new Platform( 0, 120, 200, 10 ),
-                    new Platform( 400, 60, 200, 10 ),
+                    new Platform( 0, 120 ),
+                    new Platform( 400, 60 ),
+                    new Platform( 0, -120 ),
+                    new Platform( -400, -180 ),
                     new Trap( -2000, 200, 10000, height ),
-                    new CheckPoint( 500, 60 )
+                    new CheckPoint( 500, 60 ),
+                    new CheckPoint( -300, -180 )
 
                 ],
                 enemy : [
