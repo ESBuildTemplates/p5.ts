@@ -14,7 +14,7 @@ class Party {
                     new Platform( 400, 60 ),
                     new Platform( 0, -120 ),
                     new Platform( -400, -180 ),
-                    new Trap( -2000, 200, 10000, height ),
+                    new Trap( -1000, 200, 4000, 1000 ),
                     new CheckPoint( 500, 60 ),
                     new CheckPoint( -300, -180 )
 
