@@ -5,8 +5,16 @@ export class Collectable extends Entity {
 
     constructor( options ){
         super( options )
+
         this.onCollected = options.onCollected
-        this.isCollected = false
+
+        // Reset
+        const reset = ()=>{
+            this.isCollected = false
+            this.isDraw = !!this.onDraw
+        }
+        this.resets.push(reset)
+        reset()
     }
 
     collect(){

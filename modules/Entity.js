@@ -3,17 +3,13 @@ export class Entity {
     
     constructor( options = {} ){
 
+        // Options
+        this.options = options
+
         // Position
         this.name = options.name
         this.parent = options.parent
         this.children = options.children
-
-        // Properties
-        this._x = options.x
-        this._y = options.y
-        this._width = options.width
-        this._height = options.height
-        this._scale = options.scale || 1
 
         // Custom functions
         this.onDraw = options.onDraw
@@ -24,6 +20,16 @@ export class Entity {
         this.isDebug = false
         this.isDraw = !!this.onDraw
 
+        // Resets
+        const reset = ()=>{
+            this._x = this.options.x
+            this._y = this.options.y
+            this._scale = this.options.scale || 1
+            this._width = this.options.width
+            this._height = this.options.height
+        }
+        this.resets = [reset]
+        reset()
     }
 
     // Getters
@@ -50,11 +56,15 @@ export class Entity {
     get bottom()    { return this.y + this.height / 2 }
 
     // Functions
+    reset(){ 
+        for(const reset of this.resets) reset() 
+        if(this.children) for(const child of this.children) child.reset()
+    }
     move( x, y ){
         this._x += x
         this._y += y
     }
-    place( x, y, real ){
+    place( x, y ){
         this._x = x
         this._y = y
     }
