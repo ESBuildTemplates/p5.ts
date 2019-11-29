@@ -15,6 +15,7 @@ export class Entity {
         this.onDraw = options.onDraw
         this.onClic = options.onClic
         this.onDebug = options.onDebug
+        this.onFrame = []
 
         // Flags
         this.isDebug = false

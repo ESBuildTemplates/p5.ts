@@ -7,7 +7,12 @@ export class Character extends Entity {
 
         super( options )
 
-        // Reset
+        // onFrame
+        this.frames.push(()=>{
+            
+        })
+
+        // onReset
         const reset = ()=>{
             this.lifes = this.options.lifes || 1
             this._vit_x = this.options.vit_x || 0
