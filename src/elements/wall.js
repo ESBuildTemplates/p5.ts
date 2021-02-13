@@ -1,5 +1,1 @@
-
-
-class Wall extends Polygon {
-    
-}
+class Wall extends Polygon {}

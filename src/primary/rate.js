@@ -1,5 +1,3 @@
-
-
 // class Rate {
 
 //     constructor( limit, callbackOn, callbackOff = ()=>false ){
