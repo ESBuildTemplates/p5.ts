@@ -1,7 +1,10 @@
-class Cursor extends HitBox {
-  constructor(party) {
+import HitBox from "../primary/HitBox"
+import Polygon from "../primary/Polygon"
+import Party from "../Party"
+
+export default class Cursor extends HitBox {
+  constructor(public party: Party) {
     super(0, 0, 20, new Polygon(0, 0, 15, 15))
-    this.party = party
   }
 
   frame() {
@@ -23,7 +26,7 @@ class Cursor extends HitBox {
       this.width / 2,
       this.width / 2
     )
-    if (this._debug) this.debug()
+    if (this.debugMode) this.debug()
   }
 
   debug() {

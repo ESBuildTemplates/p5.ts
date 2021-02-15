@@ -1,9 +1,19 @@
-import Player from "./elements/Player"
+import CheckPoint from "./elements/CheckPoint"
+import Rectangle from "./primary/Rectangle"
 import Platform from "./elements/Platform"
+import Cursor from "./elements/Cursor"
+import Player from "./elements/Player"
+import Enemy from "./elements/Enemy"
+import Level from "./elements/Level"
+import Trap from "./elements/Trap"
 
 export default class Party {
-  public keys: { [key: string]: boolean }
+  public keys: { [key: string]: boolean } = {}
   public player: Player
+  public cursor: Cursor
+  public levels: Level[]
+  public levelIndex = 0
+  public debugMode = false
 
   constructor() {
     this.levels = [
@@ -26,17 +36,14 @@ export default class Party {
           new CheckPoint(500, 60),
           new CheckPoint(-300, -180),
         ],
-        enemy: [new Enemy(), new Enemy()],
+        enemies: [new Enemy(0, 0, this, []), new Enemy(0, 0, this, [])],
       }),
     ]
-    this.levelIndex = 0
-    this.keys = {}
-    this._debug = false
     this.player = new Player(this)
     this.cursor = new Cursor(this)
   }
 
-  get elements() {
+  get elements(): Rectangle[] {
     return [this.level, this.player, this.cursor].sort((a, b) => a.z - b.z)
   }
 
@@ -74,7 +81,7 @@ export default class Party {
     this.elements.forEach((element) => {
       element.draw()
     })
-    if (this._debug) this.debug()
+    if (this.debugMode) this.debug()
   }
 
   debug() {

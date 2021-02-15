@@ -1,7 +1,13 @@
 import MoveBox from "../primary/MoveBox"
+import Party from "../Party"
+import Polygon from "../primary/Polygon"
+import Trap from "./Trap"
+import drawPlayer from "../drawings/drawPlayer"
 
 export default class Player extends MoveBox {
-  constructor(party) {
+  public vitality = 3
+
+  constructor(public party: Party) {
     super(
       party.level.spawns[0].x,
       party.level.spawns[0].y,
@@ -13,13 +19,10 @@ export default class Player extends MoveBox {
       new Polygon(-15, -30, 15, 30, 2), // jambe gauche
       new Polygon(0, -30, 15, 30, 2) // jambe droite
     )
-
-    this.lifes = 3
-    this.party = party
   }
 
   reset() {
-    this.lifes = 3
+    this.vitality = 3
     this.party.respawn()
   }
 
@@ -75,199 +78,18 @@ export default class Player extends MoveBox {
     // deadly fall
     if (
       this.touch(
-        ...this.party.level.polygons.filter(
-          (polygon) => polygon instanceof Trap
-        )
+        ...this.party.level.children.filter((child) => child instanceof Trap)
       )
     ) {
-      this.lifes--
+      this.vitality--
       this.party.respawn()
-      if (this.lifes < 0) {
+      if (this.vitality < 0) {
         this.party.reset()
       }
     }
   }
 
   draw() {
-    const [
-      tete,
-      brasGauche,
-      brasDroit,
-      torse,
-      jambeGauche,
-      jambeDroite,
-    ] = this.polygons
-
-    // tete
-    let centerX = tete.centerX + this.velocity.x * 8,
-      top = tete.top,
-      bottom = tete.bottom
-
-    if (this.party.keys["38"]) {
-      top -= 5
-      bottom -= 5
-    }
-    if (this.party.keys["40"]) {
-      top += 5
-      bottom += 5
-    }
-    strokeWeight(5)
-    stroke(0)
-    fill(255)
-    rect(tete.left, tete.top, tete.width, tete.height, tete.width / 5)
-
-    const lifes = this.lifes
-
-    // yeux
-    noFill()
-    if (lifes == 0) {
-      line(centerX - 15, top + 15, centerX - 5, top + 30)
-      line(centerX - 5, top + 15, centerX - 15, top + 30)
-      line(centerX + 15, top + 15, centerX + 5, top + 30)
-      line(centerX + 5, top + 15, centerX + 15, top + 30)
-    } else {
-      line(centerX - 10, top + 15, centerX - 10, top + 30)
-      line(centerX + 10, top + 15, centerX + 10, top + 30)
-    }
-
-    // bouche
-    if (lifes >= 3) {
-      bezier(
-        centerX - 10,
-        bottom - 15,
-        centerX - 5,
-        bottom - 10,
-        centerX + 5,
-        bottom - 10,
-        centerX + 10,
-        bottom - 15
-      )
-    } else if (lifes == 2) {
-      line(centerX - 8, bottom - 15, centerX + 8, bottom - 15)
-    } else if (lifes == 1) {
-      bezier(
-        centerX - 10,
-        bottom - 10,
-        centerX - 5,
-        bottom - 15,
-        centerX + 5,
-        bottom - 15,
-        centerX + 10,
-        bottom - 10
-      )
-    } else {
-      bezier(
-        centerX - 10,
-        bottom - 10,
-        centerX - 5,
-        bottom - 20,
-        centerX + 5,
-        bottom - 20,
-        centerX + 10,
-        bottom - 10
-      )
-      line(centerX - 10, bottom - 10, centerX + 10, bottom - 10)
-    }
-
-    // bras gauche
-    fill(255)
-    angleMode(RADIANS)
-    push()
-    translate(brasGauche.centerX, brasGauche.top + 5)
-    rotate(Math.max(this.velocity.x / 3, 0))
-    translate(-brasGauche.centerX, -(brasGauche.top + 5))
-    rect(
-      brasGauche.left,
-      brasGauche.top,
-      brasGauche.width,
-      brasGauche.height,
-      brasGauche.width / 2,
-      0,
-      0,
-      brasGauche.width / 2
-    )
-    pop()
-
-    // bras droit
-    push()
-    translate(brasDroit.centerX, brasDroit.top + 5)
-    rotate(Math.min(this.velocity.x / 3, 0))
-    translate(-brasDroit.centerX, -(brasDroit.top + 5))
-    rect(
-      brasDroit.left,
-      brasDroit.top,
-      brasDroit.width,
-      brasDroit.height,
-      0,
-      brasGauche.width / 2,
-      brasGauche.width / 2,
-      0
-    )
-    pop()
-
-    // torse
-    rect(
-      torse.left,
-      torse.top,
-      torse.width,
-      torse.height,
-      0,
-      0,
-      torse.width / 4,
-      torse.width / 4
-    )
-
-    // jambe gauche
-    push()
-    translate(jambeGauche.centerX, jambeGauche.top + 5)
-    rotate(
-      Math.max(
-        map(this.jumpHeight, 0, this.jumpMaxHeight, 0, 0.5) +
-          this.velocity.x / 10,
-        0
-      )
-    )
-    translate(-jambeGauche.centerX, -(jambeGauche.top + 5))
-    rect(
-      jambeGauche.left,
-      jambeGauche.top,
-      jambeGauche.width,
-      jambeGauche.height,
-      jambeGauche.width / 2,
-      jambeGauche.width / 2,
-      0,
-      0
-    )
-    pop()
-
-    // jambe droite
-    push()
-    translate(jambeDroite.centerX, jambeDroite.top + 5)
-    rotate(
-      Math.min(
-        map(this.jumpHeight, 0, this.jumpMaxHeight, 0, -0.5) +
-          this.velocity.x / 10,
-        0
-      )
-    )
-    translate(-jambeDroite.centerX, -(jambeDroite.top + 5))
-    rect(
-      jambeDroite.left,
-      jambeDroite.top,
-      jambeDroite.width,
-      jambeDroite.height,
-      jambeDroite.width / 2,
-      jambeDroite.width / 2,
-      0,
-      0
-    )
-    pop()
-
-    if (this._debug) {
-      this.debug()
-    }
-    this.polygons.forEach((polygon) => {
-      if (polygon._debug) polygon.debug()
-    })
+    drawPlayer(this)
   }
 }

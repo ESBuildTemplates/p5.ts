@@ -2,10 +2,11 @@
 /// <reference path="../node_modules/@types/p5/global.d.ts" />
 
 import Party from "./Party"
+// import Cursor from "./elements/Cursor"
 
 document.addEventListener("contextmenu", (event) => event.preventDefault())
 
-var party: Party
+let party: Party
 
 function setup() {
   createCanvas(
@@ -32,27 +33,27 @@ function keyReleased() {
   party.keys[String(keyCode)] = false
 }
 
-function mousePressed() {
-  let target
-  if (mouseButton === LEFT) {
-    target = party.cursor.touch(
-      ...party.elements
-        .filter((element) => {
-          return !(element instanceof Cursor)
-        })
-        .map((element) => {
-          return element.polygons
-        })
-        .flat()
-    )
-  } else {
-    target = party.cursor.touch(
-      ...party.elements.filter((element) => {
-        return !(element instanceof Cursor)
-      })
-    )
-  }
-  if (target) {
-    target._debug = !target._debug
-  }
-}
+// function mousePressed() {
+//   let target
+//   if (mouseButton === LEFT) {
+//     target = party.cursor.touch(
+//       ...party.elements
+//         .filter((element) => {
+//           return !(element instanceof Cursor)
+//         })
+//         .map((element) => {
+//           return element.polygons
+//         })
+//         .flat()
+//     )
+//   } else {
+//     target = party.cursor.touch(
+//       ...party.elements.filter((element) => {
+//         return !(element instanceof Cursor)
+//       })
+//     )
+//   }
+//   if (target) {
+//     target.debugMode = !target.debugMode
+//   }
+// }
