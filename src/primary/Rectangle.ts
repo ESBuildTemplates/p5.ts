@@ -39,8 +39,13 @@ export default abstract class Rectangle {
 
   addChildren(...children: Rectangle[]) {
     for (const child of children) {
-      child.parent = this
+      this.addChild(child)
     }
+  }
+
+  addChild(child: Rectangle) {
+    this.children.push(child)
+    child.parent = this
   }
 
   static touch(r1: Rectangle, r2: Rectangle) {

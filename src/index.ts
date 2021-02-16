@@ -8,7 +8,7 @@ document.addEventListener("contextmenu", (event) => event.preventDefault())
 
 let party: Party
 
-function setup() {
+export function setup() {
   createCanvas(
     Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
     Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
@@ -17,19 +17,19 @@ function setup() {
   party = new Party()
 }
 
-function draw() {
+export function draw() {
   party.frame()
   background(20)
   party.draw()
 }
 
-function keyPressed() {
+export function keyPressed() {
   party.keys[String(keyCode)] = true
   if (keyCode == 32) {
     party.player.initJump()
   }
 }
-function keyReleased() {
+export function keyReleased() {
   party.keys[String(keyCode)] = false
 }
 
