@@ -1,7 +1,8 @@
+# ESBuild Template
 
-# Gario Beta
+- Gulp
+- p5.js
+- TypeScript
+- Browser reloading
 
-A platformer game written in TypeScript with [p5.js](https://p5js.org/).
-
-- [Demo](https://camilleabella.github.io/Gario/dist/)
-
+[Use this template](https://github.com/ESBuildTemplates/ts-p5/generate)

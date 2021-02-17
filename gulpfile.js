@@ -11,7 +11,7 @@ function bundle() {
         sourcemap: "inline",
         bundle: true,
         target: ["chrome58", "firefox57", "safari11", "edge16"],
-        globalName: "Gario",
+        globalName: "app",
         loader: {
           ".ts": "ts",
           ".json": "json",

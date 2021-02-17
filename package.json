@@ -1,6 +1,6 @@
 {
-  "name": "gario",
-  "version": "0.1",
+  "name": "ts-p5",
+  "version": "1.0.0",
   "license": "MIT",
   "prettier": {
     "semi": false
