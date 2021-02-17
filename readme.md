@@ -1,7 +1,6 @@
-# ESBuild Template
+# ESBuild Template for p5.js
 
 - Gulp
-- p5.js
 - TypeScript
 - Browser reloading
 
