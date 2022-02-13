@@ -4,4 +4,4 @@
 - TypeScript
 - Browser reloading
 
-[Use this template](https://github.com/ESBuildTemplates/ts-p5/generate)
+[Use this template](https://github.com/ESBuildTemplates/p5.ts/generate)
